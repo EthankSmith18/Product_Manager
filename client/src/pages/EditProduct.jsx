@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams, Params } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function EditProduct() {
@@ -47,6 +47,8 @@ function EditProduct() {
       })
       .catch((err) => console.log(err));
   };
+  
+  
 
   return (
     <div>
@@ -94,7 +96,7 @@ function EditProduct() {
               />
             </div>
             <div className="d-flex justify-content-end">
-              <button type="submit" className="btn btn-warning">
+              <button type="submit" className="btn btn-warning me-2">
                 Submit Change
               </button>
             </div>

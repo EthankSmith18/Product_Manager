@@ -27,7 +27,7 @@ function Main() {
       <h1>Enter Product</h1>
       <ProductForm setLoaded={setLoaded}/>
       <h1>All Products</h1>
-      {loaded && <ProductList products={reversedProducts}/>}
+      {loaded && <ProductList products={reversedProducts} setLoaded={setLoaded}/>}
     </div>
   );
 }

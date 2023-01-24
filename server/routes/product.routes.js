@@ -1,4 +1,4 @@
-const { create, message, findAll, findOne, updateOne } = require('../controllers/product.controller');
+const { create, message, findAll, findOne, updateOne, deleteOne } = require('../controllers/product.controller');
 
 const express = require('express');
 const productRouter = express.Router();
@@ -15,6 +15,7 @@ productRouter
 productRouter
 .route('/products/:id')
 .get(findOne)
-.put(updateOne);
+.put(updateOne)
+.delete(deleteOne);
 
 module.exports = productRouter;
