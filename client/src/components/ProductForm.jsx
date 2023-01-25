@@ -6,25 +6,31 @@ function ProductForm({ setLoaded }) {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
     setPrice(0);
     const newProduct = {
-        title,
-        price,
-        description,
+      title,
+      price,
+      description,
     };
 
     axios
-        .post('http://localhost:5001/api/products', newProduct)
-        .then(res => {
-            console.log(res.data)
-            setLoaded(false);
-        })
-        .catch(err => console.log(err));
+      .post("http://localhost:5001/api/products", newProduct)
+      .then((res) => {
+        console.log(res.data);
+        setErrors({})
+        setLoaded(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err);
+        setErrors(err.response.data.errors);
+      });
   };
 
   return (
@@ -43,6 +49,11 @@ function ProductForm({ setLoaded }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
+            { errors?.title &&
+            <div>
+            <span className="form-text text-danger">{errors.title.message}</span>
+            </div>
+            }            
             <label htmlFor="price" className="form-label">
               Price:
             </label>
@@ -54,6 +65,11 @@ function ProductForm({ setLoaded }) {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
+            { errors?.price &&
+            <div>
+            <span className="form-text text-danger">{errors.price.message}</span>
+            </div>
+            }
             <label htmlFor="description" className="form-label">
               Description:
             </label>
@@ -65,9 +81,14 @@ function ProductForm({ setLoaded }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            { errors?.description &&
+            <span className="form-text text-danger">{errors.description.message}</span>
+            }
           </div>
           <div className="d-flex justify-content-end">
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </div>
         </form>
       </div>
